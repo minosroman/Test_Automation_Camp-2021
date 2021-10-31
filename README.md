@@ -6,3 +6,6 @@
 > 005 - JavaScript - Language Basics. Part 2.
 
 > 006 - JavaScript - Language Basics. Part 3.
+
+> 007 - JavaScript - ES6 OOP
+
