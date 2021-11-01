@@ -1,0 +1,11 @@
+{
+    "name": "007_JS_ES6_OOP",
+    "version": "1.0.0",
+    "description": "007 - JavaScript - ES6 OOP",
+    "author": "Roman Budziak",
+    "license": "ISC",
+    "type": "module",
+    "dependencies": {},
+    "devDependencies": {},
+    "scripts": {}
+  }
