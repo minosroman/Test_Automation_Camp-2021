@@ -9,3 +9,5 @@
 
 > 007 - JavaScript - ES6 OOP
 
+> 008 - JavaScript - Promises, Async/await
+
