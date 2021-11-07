@@ -1,7 +1,7 @@
 {
-    "name": "007_JS_ES6_OOP",
+    "name": "008_JS_Promises",
     "version": "1.0.0",
-    "description": "007 - JavaScript - ES6 OOP",
+    "description": "008 - JavaScript - Promises, Async/await",
     "author": "Roman Budziak",
     "license": "ISC",
     "type": "module",

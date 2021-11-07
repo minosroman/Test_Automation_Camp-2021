@@ -1,18 +1,18 @@
-import Vehicle from "./Vehicle.js";
-import Car from "./Car.js";
-import Truck from "./Truck.js";
+//JAVASCRIPT - Promises, Async/await
 
-let ford = new Car('Mondeo', '2013', 'sedan', 'black', '280 km/h');
-ford.displayInfo();
-ford.startEngine();
-ford.drive();
-ford.transportPeople();
+//Create a first function (which takes argument `data`) that always returns a promise and:
+//1.If data is not a number, the function returns a promise rejected instantly and give the word "error" (in a string
+//2.If data is an odd number, return a promise resolved 1 second later and give "odd" (in a string
+//3.If data is an even number, return a promise rejected 2 seconds later and give "even" (in a string
+import {runPromise} from './PromiseApp.js';
 
-let scania = new Truck('R730', '2013', 'red', '130 km/h');
-scania.displayInfo();
-scania.startEngine();
-scania.drive();
-scania.transportContainer();
+runPromise(5);
+runPromise(8);
+runPromise('String');
 
-Vehicle.repair(ford);
-new Vehicle().getType(ford);
+//5. Write same tasks(1-4) using async/await
+import {runAsync} from './AsyncApp.js';
+
+runAsync(555);
+runAsync(888);
+runAsync('Eleks');
