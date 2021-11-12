@@ -33,10 +33,10 @@ function genData(obj) {
     return obj;
 }
 
-function wrtFile(path, jsn) {
+function crtFile(path, jsn) {
     try {
         fs.writeFileSync(path, jsn);
-        console.log('File Saved Successfully!');
+        console.log('File Created!');
         return jsn;
     } catch (err) {
         if (err.code === 'ENOENT') {
@@ -60,6 +60,30 @@ function rdFile(path, encdng) {
     }
 }
 
+function appndFile(path, jsn) {
+    try {
+        if (fs.readFileSync(path, 'utf-8').length > 70) {
+            let longJsn = fs.readFileSync(path, 'utf-8');
+            let result = longJsn.substring(longJsn.indexOf("}") + 1, longJsn.length);
+            console.log('Rewrite File Successfully!');
+            fs.writeFileSync(path, '');
+            fs.appendFileSync(path, result);
+            return result;
+
+        } else {
+            fs.appendFileSync(path, jsn);
+            console.log('Append To File Successfully!');
+            return jsn;
+        }
+
+    } catch (err) {
+        if (err.code === 'ENOENT') {
+            console.log('File is NOT exist!');
+        }
+        console.log('Error overwriting file');
+    }
+}
+
 function delFile(path) {
     try {
         fs.unlinkSync(path);
@@ -78,9 +102,9 @@ let jsnStr = JSON.stringify(student);
 console.log(`First time generated object: ${jsnStr} \n`);
 const filePath = 'jsnFile.json';
 
-console.log(`Created with JSON: ${wrtFile(filePath, jsnStr)} \n`);
+console.log(`Created with JSON: ${crtFile(filePath, jsnStr)} \n`);
 let objFromFile = rdFile(filePath, 'utf-8');
 console.log(`Data fom file: ${JSON.stringify(objFromFile)} \n`);
 let jsnStr2 = genData(objFromFile);
-console.log(`Changed with JSON: ${wrtFile(filePath, JSON.stringify(jsnStr2))} \n`);
+console.log(`Changed with JSON: ${appndFile(filePath, JSON.stringify(jsnStr2))} \n`);
 delFile(filePath);
