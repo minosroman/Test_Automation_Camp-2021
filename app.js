@@ -1,86 +1,32 @@
-import randomstring from 'randomstring';
-import {
-    Chance
-} from 'chance';
-import fs from 'fs';
-
-
-function genData(obj) {
-    function genName() {
-        return new Chance().first({
-            nationality: 'it'
-        });
-    }
-
-    function genLast() {
-        let last = randomstring.generate({
-            length: 5,
-            charset: 'alphabetic',
-            capitalization: 'lowercase'
-        });
-        return last.charAt(0).toUpperCase() + last.slice(1);
-    }
-
-    function genRate() {
-        return Math.floor((Math.random() * 100) + 1);
-    }
-
-    if (obj) {
-        obj.name = genName();
-        obj.surname = genLast();
-        obj.rate = genRate();
-    }
-    return obj;
-}
-
-function wrtFile(path, jsn) {
-    try {
-        fs.writeFileSync(path, jsn);
-        console.log('File Saved Successfully!');
-        return jsn;
-    } catch (err) {
-        if (err.code === 'ENOENT') {
-            console.log('File is NOT exist!');
+function calc(num1, num2, operation) {
+    let result;
+    if (Number.isInteger(num1) &&
+        Number.isInteger(num2) &&
+        operation === '+' ||
+        operation === '-' ||
+        operation === '*' ||
+        operation === '/') {
+        switch (operation) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if(num1 !== 0 && num2 !== 0){
+                   result = num1 / num2;
+                break; 
+                } else{
+                    return 'Division by zero is not allowed';
+                }
         }
-        console.log('Write file error');
+        return Math.floor(result * 100)/100;
+    } else {
+        return 'Error check input data!';
     }
 }
-
-function rdFile(path, encdng) {
-    let data;
-    try {
-        data = fs.readFileSync(path, encdng);
-        console.log('File Read Successfully!');
-        return JSON.parse(data);
-    } catch (err) {
-        if (err.code === 'ENOENT') {
-            console.log('File is NOT exist!');
-        }
-        console.log('Read file error');
-    }
-}
-
-function delFile(path) {
-    try {
-        fs.unlinkSync(path);
-        console.log('File Successfully Deleted!');
-    } catch (err) {
-        if (err.code === 'ENOENT') {
-            console.log('File is NOT exist!');
-        }
-        console.log('Delete file error.');
-    }
-}
-
-let student = {};
-genData(student);
-let jsnStr = JSON.stringify(student);
-console.log(`First time generated object: ${jsnStr} \n`);
-const filePath = 'jsnFile.json';
-
-console.log(`Created with JSON: ${wrtFile(filePath, jsnStr)} \n`);
-let objFromFile = rdFile(filePath, 'utf-8');
-console.log(`Data fom file: ${JSON.stringify(objFromFile)} \n`);
-let jsnStr2 = genData(objFromFile);
-console.log(`Changed with JSON: ${wrtFile(filePath, JSON.stringify(jsnStr2))} \n`);
-delFile(filePath);
+export default calc;
